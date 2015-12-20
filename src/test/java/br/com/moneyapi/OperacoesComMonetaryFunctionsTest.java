@@ -1,5 +1,6 @@
 package br.com.moneyapi;
 
+import static org.javamoney.moneta.function.MonetaryFunctions.isCurrency;
 import static org.javamoney.moneta.function.MonetaryFunctions.sum;
 import static org.junit.Assert.assertEquals;
 
@@ -46,4 +47,52 @@ public class OperacoesComMonetaryFunctionsTest {
 		assertEquals(30d, soma.getNumber().doubleValue(), 0);
 	}
 
+	@Test
+	public void deveriaSomarOsPrecosDeMoedasDiferentesDeFormaConvencional() throws Exception {
+		CurrencyUnit real = Monetary.getCurrency("BRL");
+		CurrencyUnit dolar = Monetary.getCurrency("USD");
+		
+		MonetaryAmount dezReais = Money.of(10, real);
+		MonetaryAmount vinteReais = Money.of(20, real);
+		
+		MonetaryAmount cincoDolares = Money.of(5, dolar);
+		MonetaryAmount quinzeDolares = Money.of(15, dolar);
+		
+		List<MonetaryAmount> precos = Arrays.asList(dezReais, vinteReais, cincoDolares, quinzeDolares);
+		
+		MonetaryAmount somaEmReal = Money.of(0, real);
+		MonetaryAmount somaEmDolar = Money.of(0, dolar);
+		
+		for (MonetaryAmount preco: precos) {
+			if (preco.getCurrency().equals(real)) {
+				somaEmReal = somaEmReal.add(preco);
+			} else {
+				somaEmDolar = somaEmDolar.add(preco);
+			}
+		}
+		
+		assertEquals(30d, somaEmReal.getNumber().doubleValue(), 0);
+		assertEquals(20d, somaEmDolar.getNumber().doubleValue(), 0);
+	}
+	
+	@Test
+	public void deveriaSomarOsPrecosDeMoedasDiferentesUtilizandoMoneyAPI() throws Exception {
+		CurrencyUnit real = Monetary.getCurrency("BRL");
+		CurrencyUnit dolar = Monetary.getCurrency("USD");
+		
+		MonetaryAmount dezReais = Money.of(10, real);
+		MonetaryAmount vinteReais = Money.of(20, real);
+		
+		MonetaryAmount cincoDolares = Money.of(5, dolar);
+		MonetaryAmount quinzeDolares = Money.of(15, dolar);
+		
+		List<MonetaryAmount> precos = Arrays.asList(dezReais, vinteReais, cincoDolares, quinzeDolares);
+		
+		MonetaryAmount somaEmReal = precos.stream().filter(isCurrency(real)).reduce(sum()).get();
+		MonetaryAmount somaEmDolar = precos.stream().filter(isCurrency(dolar)).reduce(sum()).get();
+		
+		assertEquals(30d, somaEmReal.getNumber().doubleValue(), 0);
+		assertEquals(20d, somaEmDolar.getNumber().doubleValue(), 0);
+	}
+	
 }

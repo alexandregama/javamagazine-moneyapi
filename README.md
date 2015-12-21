@@ -3,7 +3,7 @@ Artigo sobre MoneyAPI para a Java Magazine
 
 ## To Do ##
 
-- [ ] MonetaryFunctions
+- [x] MonetaryFunctions
   - Soma de preços com mesma moeda
   - Soma de preços com moedas diferentes
   - Queries para comparação de preços

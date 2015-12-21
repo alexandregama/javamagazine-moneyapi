@@ -7,10 +7,18 @@ Artigo sobre MoneyAPI para a Java Magazine
   - Soma de preços com mesma moeda
   - Soma de preços com moedas diferentes
   - Queries para comparação de preços
-- [ ] Agrupamento de valores com a mesma moeda
-- [ ] Agrupamento de valores com moedas diferentes
+- [ ] Ordenação
+  - Utilizanod a mesma moeda
+  - Utilizando moedas diferentes
+- [ ] Agrupamento de valores
+  - Utilizando a mesma moeda
+  - Utilizando moedas diferentes
 - [ ] Conversão de moeda
-- [ ] Funcionamento e exceções de conversão de moeda
-- [ ] Estatística para um grupo de valores de mesma moeda
-- [ ] Estatística para um grupo de valores de moedas diferentes
+  - Básico sobre os órgãos
+  - Conversão básica
+  - Tipos de exceções
+  - Funcionamento interno
+- [ ] Estatística 
+  - Utilizando um conjunto de mesma moeda
+  - Utilizando um conjunto de moedas diferentes
 

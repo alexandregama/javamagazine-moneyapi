@@ -7,14 +7,20 @@ import javax.money.Monetary;
 import javax.money.MonetaryAmount;
 
 import org.javamoney.moneta.Money;
+import org.junit.Before;
 import org.junit.Test;
 
 public class QueriesDeComparacaoComMonetaryFunctions {
 
+	private CurrencyUnit real;
+
+	@Before
+	public void before() {
+		real = Monetary.getCurrency("BRL");
+	}
+	
 	@Test
 	public void deveriaVerificarSeUmPrecoEMaiorQueOutro() throws Exception {
-		CurrencyUnit real = Monetary.getCurrency("BRL");
-		
 		MonetaryAmount dezReais = Money.of(10, real);
 		MonetaryAmount vinteReais = Money.of(20, real);
 		
@@ -23,8 +29,6 @@ public class QueriesDeComparacaoComMonetaryFunctions {
 	
 	@Test
 	public void deveriaVerificarSeUmPrecoEMenorQueOutro() throws Exception {
-		CurrencyUnit real = Monetary.getCurrency("BRL");
-		
 		MonetaryAmount dezReais = Money.of(10, real);
 		MonetaryAmount vinteReais = Money.of(20, real);
 		
@@ -33,8 +37,6 @@ public class QueriesDeComparacaoComMonetaryFunctions {
 	
 	@Test
 	public void deveriaVerificarSeUmPrecoEPositivoENegativo() throws Exception {
-		CurrencyUnit real = Monetary.getCurrency("BRL");
-		
 		MonetaryAmount dezReais = Money.of(10, real);
 		MonetaryAmount menosDezReais = Money.of(-10, real);
 		

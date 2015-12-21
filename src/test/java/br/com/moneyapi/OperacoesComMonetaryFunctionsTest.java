@@ -12,14 +12,22 @@ import javax.money.Monetary;
 import javax.money.MonetaryAmount;
 
 import org.javamoney.moneta.Money;
+import org.junit.Before;
 import org.junit.Test;
 
 public class OperacoesComMonetaryFunctionsTest {
+	
+	private CurrencyUnit real;
+	private CurrencyUnit dolar;
+
+	@Before
+	public void before() {
+		real = Monetary.getCurrency("BRL");
+		dolar = Monetary.getCurrency("USD");
+	}
 
 	@Test
 	public void deveriaSomarOsPrecosDeFormaConvencional() {
-		CurrencyUnit real = Monetary.getCurrency("BRL");
-		
 		MonetaryAmount dezReais = Money.of(10, real);
 		MonetaryAmount vinteReais = Money.of(20, real);
 		
@@ -35,8 +43,6 @@ public class OperacoesComMonetaryFunctionsTest {
 	
 	@Test
 	public void deveriaSomarOsPrecosUtilizandoMoneyAPI() throws Exception {
-		CurrencyUnit real = Monetary.getCurrency("BRL");
-		
 		MonetaryAmount dezReais = Money.of(10, real);
 		MonetaryAmount vinteReais = Money.of(20, real);
 		
@@ -49,9 +55,6 @@ public class OperacoesComMonetaryFunctionsTest {
 
 	@Test
 	public void deveriaSomarOsPrecosDeMoedasDiferentesDeFormaConvencional() throws Exception {
-		CurrencyUnit real = Monetary.getCurrency("BRL");
-		CurrencyUnit dolar = Monetary.getCurrency("USD");
-		
 		MonetaryAmount dezReais = Money.of(10, real);
 		MonetaryAmount vinteReais = Money.of(20, real);
 		

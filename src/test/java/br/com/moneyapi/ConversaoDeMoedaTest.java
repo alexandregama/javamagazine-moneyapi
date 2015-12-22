@@ -15,14 +15,15 @@ public class ConversaoDeMoedaTest {
 	@Test
 	public void deveriaConverterUmDolarEmReal() throws Exception {
 		CurrencyUnit dolar = Monetary.getCurrency("USD");
-		
+
 		ExchangeRateProvider provider = MonetaryConversions.getExchangeRateProvider("ECB");
 		CurrencyConversion realConverter = provider.getCurrencyConversion("BRL");
-		
+
 		MonetaryAmount umDolar = Money.of(1, dolar);
-		
+
 		MonetaryAmount umDolarEmReal = umDolar.with(realConverter);
 
 		System.out.println(umDolarEmReal);
+
 	}
 }

@@ -1,5 +1,7 @@
 package br.com.moneyapi;
 
+import java.util.Locale;
+
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
@@ -14,16 +16,17 @@ public class ConversaoDeMoedaTest {
 
 	@Test
 	public void deveriaConverterUmDolarEmReal() throws Exception {
-		CurrencyUnit dolar = Monetary.getCurrency("USD");
-
+		CurrencyUnit real = Monetary.getCurrency(new Locale("pt", "BR"));
+		CurrencyUnit dolar = Monetary.getCurrency(new Locale("en", "US"));
+		
 		ExchangeRateProvider provider = MonetaryConversions.getExchangeRateProvider("ECB");
-		CurrencyConversion realConverter = provider.getCurrencyConversion("BRL");
-
-		MonetaryAmount umDolar = Money.of(1, dolar);
-
-		MonetaryAmount umDolarEmReal = umDolar.with(realConverter);
-
-		System.out.println(umDolarEmReal);
-
+		
+		MonetaryAmount money = Money.of(1, dolar);
+		
+		CurrencyConversion conversor = provider.getCurrencyConversion(real);
+		MonetaryAmount dolarParaReal = conversor.apply(money);
+		
+		System.out.println(dolarParaReal);
 	}
+	
 }

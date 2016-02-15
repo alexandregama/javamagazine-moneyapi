@@ -45,6 +45,13 @@ public class AgrupamentoEEstatisticaDePrecosTest {
 
 		assertEquals(3, precosAgrupados.get(real).size());
 		assertEquals(2, precosAgrupados.get(dolar).size());
+		
+		assertEquals(dezReais, precosAgrupados.get(real).get(0));
+		assertEquals(vinteReais, precosAgrupados.get(real).get(1));
+		assertEquals(trintaReais, precosAgrupados.get(real).get(2));
+		
+		assertEquals(cincoDolares, precosAgrupados.get(dolar).get(0));
+		assertEquals(quinzeDolares, precosAgrupados.get(dolar).get(1));
 	}
 
 	@Test

@@ -1,8 +1,8 @@
 package br.com.moneyapi.java8;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -32,4 +32,27 @@ public class OptionalTest {
 		assertEquals("Alexandre Gama", alexandre.getNome());
 	}
 	
+	@Test(expected = NoSuchElementException.class)
+	public void deveriaLancarExecaoAoTentarAcessarUmObjetoNulo() throws Exception {
+		Pessoa alexandre = null;
+		
+		Optional<Pessoa> optional = Optional.ofNullable(alexandre);
+		
+		optional.get();
+	}
+	
+	@Test
+	public void deveriaRetornarUmNovoObjetoPessoaAoTentarAcessarUmObjetoNulo() throws Exception {
+		Pessoa alexandre = null;
+		
+		Optional<Pessoa> optional = Optional.ofNullable(alexandre);
+		
+		Pessoa pessoa = optional.orElse(new Pessoa("Alexandre"));
+		
+		assertEquals("Alexandre", pessoa.getNome());
+	}
+	
 }
+
+
+
